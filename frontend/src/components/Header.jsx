@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+// Đảm bảo đường dẫn này đúng với cấu trúc thư mục của bạn
+import { useAuth } from '../context/AuthContext.jsx'; 
 
 function Header() {
   const auth = useAuth();
-  const [searchTerm, setSearchTerm] = useState(''); // State để lưu nội dung ô tìm kiếm
-  const navigate = useNavigate(); // Hook để điều hướng
+  const [searchTerm, setSearchTerm] = useState(''); 
+  const navigate = useNavigate(); 
 
-  // Hàm xử lý khi submit form tìm kiếm
   const handleSearch = (e) => {
-    e.preventDefault(); // Ngăn trang tải lại
+    e.preventDefault(); 
     if (searchTerm.trim()) {
-      // Điều hướng đến trang kết quả tìm kiếm
       navigate(`/search?q=${searchTerm}`);
-      setSearchTerm(''); // Xóa nội dung ô tìm kiếm
+      setSearchTerm(''); 
     }
   };
 
@@ -25,7 +24,6 @@ function Header() {
             App Quản Lý Đơn Hàng
           </Link>
           
-          {/* === THANH TÌM KIẾM MỚI === */}
           <form onSubmit={handleSearch} className="flex-1 hidden sm:flex justify-center px-8">
             <input 
               type="text"
@@ -41,10 +39,8 @@ function Header() {
               Tìm
             </button>
           </form>
-          {/* ========================== */}
 
           <div className="flex items-center space-x-4">
-            {/* ... (Code Link Giỏ hàng, Đăng nhập, Đăng xuất giữ nguyên) ... */}
             <Link to="/cart" className="relative p-2 text-gray-600 hover:text-orange-600">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -52,6 +48,11 @@ function Header() {
             </Link>
             {auth.token ? (
               <>
+                {auth.user?.role === 'admin' && (
+                    <Link to="/admin" className="text-sm font-bold text-red-600 hover:text-red-800 mr-2 border border-red-600 px-2 py-1 rounded">
+                        QUẢN LÝ SHOP
+                    </Link>
+                )}
                 <Link to="/my-orders" className="text-sm font-medium text-gray-700 hover:text-orange-600">
                   Đơn Hàng
                 </Link>
@@ -64,12 +65,8 @@ function Header() {
               </>
             ) : (
               <>
-                <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-orange-600">
-                  Đăng nhập
-                </Link>
-                <Link to="/register" className="text-sm font-medium text-gray-700 hover:text-orange-600">
-                  Đăng ký
-                </Link>
+                <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-orange-600">Đăng nhập</Link>
+                <Link to="/register" className="text-sm font-medium text-gray-700 hover:text-orange-600">Đăng ký</Link>
               </>
             )}
           </div>

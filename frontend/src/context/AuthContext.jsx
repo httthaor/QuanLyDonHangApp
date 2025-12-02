@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import api from '../api/axios'; // Dùng file api vừa tạo
+import api from '../api/axios.js'; // Import file axios vừa tạo ở trên
 
 const AuthContext = createContext();
 
@@ -40,10 +40,11 @@ export function AuthProvider({ children }) {
       const response = await api.post('/auth/register', userData);
       setToken(response.data.token);
       setUser({ email: userData.email, role: 'customer', id: response.data.user_id });
-      navigate('/');
+      navigate('/'); 
     } catch (err) {
       console.error("Lỗi đăng ký:", err);
-      alert(err.response?.data?.message || 'Đăng ký thất bại');
+      const msg = err.response?.data?.message || 'Đăng ký thất bại (Lỗi mạng hoặc Server)';
+      throw new Error(msg); 
     }
   };
 
@@ -72,7 +73,6 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-// Hook tiện ích
 export function useAuth() {
   return useContext(AuthContext);
 }

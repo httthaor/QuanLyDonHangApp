@@ -16,7 +16,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import MyOrdersPage from './pages/MyOrdersPage';
 import ProfilePage from './pages/ProfilePage';
 import ProfileEditPage from './pages/ProfileEditPage';
-import SearchPage from './pages/SearchPage'; // <-- IMPORT TRANG MỚI
+import SearchPage from './pages/SearchPage';
+import AdminPage from './pages/AdminPage'; // <-- ĐẢM BẢO FILE NÀY TỒN TẠI
 
 // Layout chung
 function Layout() {
@@ -41,14 +42,35 @@ function App() {
         <Route path="login" element={<LoginPage />} />
         <Route path="register" element={<RegisterPage />} />
         <Route path="product/:id" element={<ProductDetailPage />} />
-        <Route path="search" element={<SearchPage />} /> {/* <-- THÊM ROUTE MỚI */}
+        <Route path="search" element={<SearchPage />} />
         
         {/* Trang cần đăng nhập */}
-        <Route path="cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
-        <Route path="checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
-        <Route path="my-orders" element={<ProtectedRoute><MyOrdersPage /></ProtectedRoute>} />
-        <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-        <Route path="profile/edit" element={<ProtectedRoute><ProfileEditPage /></ProtectedRoute>} />
+        <Route 
+          path="cart" 
+          element={<ProtectedRoute><CartPage /></ProtectedRoute>} 
+        />
+        <Route 
+          path="checkout" 
+          element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} 
+        />
+        <Route 
+          path="my-orders" 
+          element={<ProtectedRoute><MyOrdersPage /></ProtectedRoute>} 
+        />
+        <Route 
+          path="profile" 
+          element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} 
+        />
+        <Route 
+          path="profile/edit" 
+          element={<ProtectedRoute><ProfileEditPage /></ProtectedRoute>} 
+        />
+
+        {/* === ROUTE ADMIN === */}
+        <Route 
+          path="admin" 
+          element={<ProtectedRoute><AdminPage /></ProtectedRoute>} 
+        />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
