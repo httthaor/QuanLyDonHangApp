@@ -1,18 +1,15 @@
 import axios from 'axios';
 
-// Hàm để tự chọn Base URL
+// Hàm tự động xác định URL Backend
 const getBaseUrl = () => {
-  const currentUrl = window.location.href; // Lấy địa chỉ hiện tại trên thanh browser
-  
-  // 1. Nếu đang chạy Localhost
-  if (currentUrl.includes('localhost')) {
+  const currentUrl = window.location.origin;
+  if (currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1')) {
     return 'http://localhost:8080/api';
   }
-
-  // 2. Nếu đang chạy trên VS Code Port Forwarding 
   if (currentUrl.includes('5173')) {
-    return window.location.origin.replace('5173', '8080') + '/api';
+    return currentUrl.replace('5173', '8080') + '/api';
   }
+  return 'http://localhost:8080/api';
 };
 
 const api = axios.create({

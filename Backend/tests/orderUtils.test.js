@@ -1,15 +1,16 @@
-const { calculateTotal, isFreeShip } = require('../utils/orderUtils');
+const { calculateTotal, validateOrderInput } = require('../utils/orderUtils');
 
-// === NHÓM TEST 1: KIỂM THỬ HÀM TÍNH TỔNG ===
-describe('Kiểm thử Unit: Hàm calculateTotal', () => {
+// === PHẦN 1: TEST HÀM TÍNH TIỀN ===
+describe('Unit Test: Hàm calculateTotal (Tính tổng tiền)', () => {
     
-    test('TC-01: Tính đúng tổng tiền cho giỏ hàng bình thường', () => {
+    test('TC-01: Tính đúng tổng tiền cho giỏ hàng có 2 món', () => {
+        // Giả lập giỏ hàng: 2 cái áo (300k) + 1 cái quần (500k)
         const cartItems = [
-            { price: 100000, quantity: 2 }, // 200k
-            { price: 50000, quantity: 1 }   // 50k
+            { price: 300000, quantity: 2 }, 
+            { price: 500000, quantity: 1 } 
         ];
-        // Mong đợi kết quả là 250.000
-        expect(calculateTotal(cartItems)).toBe(250000);
+        // Kỳ vọng: (300k * 2) + (500k * 1) = 1.100.000
+        expect(calculateTotal(cartItems)).toBe(1100000);
     });
 
     test('TC-02: Trả về 0 nếu giỏ hàng rỗng', () => {
@@ -17,27 +18,37 @@ describe('Kiểm thử Unit: Hàm calculateTotal', () => {
         expect(calculateTotal(cartItems)).toBe(0);
     });
 
-    test('TC-03: Báo lỗi nếu số lượng bị âm (Test case lỗi)', () => {
+    test('TC-03: Báo lỗi nếu dữ liệu sai (Giá âm)', () => {
         const cartItems = [
-            { price: 100000, quantity: -1 }
+            { price: -100000, quantity: 1 } // Giá âm là vô lý
         ];
-        // Mong đợi hàm sẽ ném ra lỗi (Throw Error)
-        expect(() => calculateTotal(cartItems)).toThrow("Giá hoặc số lượng không được âm");
+        // Kỳ vọng: Hàm sẽ ném ra lỗi (Error)
+        expect(() => calculateTotal(cartItems)).toThrow("Dữ liệu sản phẩm không hợp lệ");
     });
 });
 
-// === NHÓM TEST 2: KIỂM THỬ HÀM FREESHIP ===
-describe('Kiểm thử Unit: Hàm isFreeShip', () => {
+// === PHẦN 2: TEST HÀM KIỂM TRA DỮ LIỆU ĐẦU VÀO ===
+describe('Unit Test: Hàm validateOrderInput (Kiểm tra đầu vào)', () => {
 
-    test('TC-04: Không Freeship nếu dưới 2 triệu', () => {
-        expect(isFreeShip(1999999)).toBe(false);
+    test('TC-04: Báo lỗi nếu thiếu địa chỉ giao hàng', () => {
+        const input = {
+            shipping_address: "", 
+            payment_method: "COD"
+        };
+        const result = validateOrderInput(input);
+        
+        expect(result.valid).toBe(false);
+        expect(result.error).toBe("Thiếu địa chỉ giao hàng");
     });
 
-    test('TC-05: Được Freeship nếu đúng 2 triệu (Biên)', () => {
-        expect(isFreeShip(2000000)).toBe(true);
-    });
+    test('TC-05: Hợp lệ nếu đủ thông tin và đúng phương thức', () => {
+        const input = {
+            shipping_address: "123 Đường A, Quận B",
+            payment_method: "E_WALLET"
+        };
+        const result = validateOrderInput(input);
 
-    test('TC-06: Được Freeship nếu trên 2 triệu', () => {
-        expect(isFreeShip(5000000)).toBe(true);
+        expect(result.valid).toBe(true);
+        expect(result.error).toBe(null);
     });
 });

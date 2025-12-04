@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import api from '../api/axios';
-import { useAuth } from '../context/AuthContext';
+import api from '../api/axios.js'; // Đã thêm đuôi .js
+import { useAuth } from '../context/AuthContext.jsx'; // Đã thêm đuôi .jsx
 import { useNavigate, Link } from 'react-router-dom';
 
 function AdminPage() {
@@ -69,9 +69,9 @@ function AdminPage() {
               const percent = stats.orders > 0 ? Math.round((item.count / stats.orders) * 100) : 0;
               let colorClass = 'bg-gray-400';
               
-              if (item.order_status === 'Completed') colorClass = 'bg-green-500';
-              else if (item.order_status === 'Pending') colorClass = 'bg-yellow-400';
+              if (item.order_status === 'Pending') colorClass = 'bg-yellow-400';
               else if (item.order_status === 'Shipping') colorClass = 'bg-blue-400';
+              else if (item.order_status === 'Shipped') colorClass = 'bg-green-500';
               else if (item.order_status === 'Cancelled') colorClass = 'bg-red-400';
 
               return (

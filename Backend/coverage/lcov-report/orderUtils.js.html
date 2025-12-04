@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">93.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>14/15</span>
             </div>
         
             
@@ -87,7 +87,24 @@
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
-<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,41 +125,72 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">// Hàm tính tổng tiền của một giỏ hàng
-// items: mảng các sản phẩm [{ price: 1000, quantity: 2 }, ...]
-function calculateTotal(items) {
-    // Case: Giỏ hàng rỗng hoặc null
-    if (!items || items.length === 0) {
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * Hàm tính tổng tiền đơn hàng
+ * Logic: Cộng dồn (Giá * Số lượng) của từng sản phẩm
+ */
+function calculateTotal(cartItems) {
+    if (!cartItems || cartItems.length === 0) {
         return 0;
     }
 &nbsp;
     let total = 0;
-    for (const item of items) {
-        // Case: Giá hoặc số lượng bị âm (Lỗi dữ liệu)
-        if (item.price &lt; 0 || item.quantity &lt; 0) {
-            throw new Error("Giá hoặc số lượng không được âm");
+    for (const item of cartItems) {
+        // Kiểm tra dữ liệu rác (Giá âm, số lượng âm)
+        if (item.price &lt; 0 || item.quantity &lt;= 0) {
+            throw new Error("Dữ liệu sản phẩm không hợp lệ (Giá hoặc số lượng bị sai)");
         }
-        total += item.price * item.quantity;
+        total += Number(item.price) * Number(item.quantity);
     }
     return total;
 }
 &nbsp;
-// Hàm kiểm tra xem đơn hàng có được Freeship không (trên 2 triệu)
-function isFreeShip(totalAmount) {
-    return totalAmount &gt;= 2000000;
+/**
+ * Hàm kiểm tra dữ liệu đầu vào khi tạo đơn (Validation)
+ * Logic: Phải có địa chỉ, phải có phương thức thanh toán hợp lệ
+ */
+function validateOrderInput(data) {
+    // 1. Kiểm tra địa chỉ
+    if (!data.shipping_address || data.shipping_address.trim() === "") {
+        return { valid: false, error: "Thiếu địa chỉ giao hàng" };
+    }
+&nbsp;
+    // 2. Kiểm tra phương thức thanh toán
+    const validMethods = ['COD', 'E_WALLET'];
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!data.payment_method || !validMethods.includes(data.payment_method)) {
+<span class="cstat-no" title="statement not covered" >        return { valid: false, error: "Phương thức thanh toán không hợp lệ (Phải là COD hoặc E_WALLET)" };</span>
+    }
+&nbsp;
+    // Nếu OK hết
+    return { valid: true, error: null };
 }
 &nbsp;
-module.exports = { calculateTotal, isFreeShip };</pre></td></tr></table></pre>
+module.exports = { calculateTotal, validateOrderInput };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-22T07:31:42.068Z
+                at 2025-12-03T06:31:39.642Z
             </div>
         <script src="prettify.js"></script>
         <script>

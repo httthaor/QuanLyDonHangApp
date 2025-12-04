@@ -1,25 +1,41 @@
-// Hàm tính tổng tiền của một giỏ hàng
-// items: mảng các sản phẩm [{ price: 1000, quantity: 2 }, ...]
-function calculateTotal(items) {
-    // Case: Giỏ hàng rỗng hoặc null
-    if (!items || items.length === 0) {
+/**
+ * Hàm tính tổng tiền đơn hàng
+ * Logic: Cộng dồn (Giá * Số lượng) của từng sản phẩm
+ */
+function calculateTotal(cartItems) {
+    if (!cartItems || cartItems.length === 0) {
         return 0;
     }
 
     let total = 0;
-    for (const item of items) {
-        // Case: Giá hoặc số lượng bị âm (Lỗi dữ liệu)
-        if (item.price < 0 || item.quantity < 0) {
-            throw new Error("Giá hoặc số lượng không được âm");
+    for (const item of cartItems) {
+        // Kiểm tra dữ liệu rác (Giá âm, số lượng âm)
+        if (item.price < 0 || item.quantity <= 0) {
+            throw new Error("Dữ liệu sản phẩm không hợp lệ (Giá hoặc số lượng bị sai)");
         }
-        total += item.price * item.quantity;
+        total += Number(item.price) * Number(item.quantity);
     }
     return total;
 }
 
-// Hàm kiểm tra xem đơn hàng có được Freeship không (trên 2 triệu)
-function isFreeShip(totalAmount) {
-    return totalAmount >= 2000000;
+/**
+ * Hàm kiểm tra dữ liệu đầu vào khi tạo đơn (Validation)
+ * Logic: Phải có địa chỉ, phải có phương thức thanh toán hợp lệ
+ */
+function validateOrderInput(data) {
+    // 1. Kiểm tra địa chỉ
+    if (!data.shipping_address || data.shipping_address.trim() === "") {
+        return { valid: false, error: "Thiếu địa chỉ giao hàng" };
+    }
+
+    // 2. Kiểm tra phương thức thanh toán
+    const validMethods = ['COD', 'E_WALLET'];
+    if (!data.payment_method || !validMethods.includes(data.payment_method)) {
+        return { valid: false, error: "Phương thức thanh toán không hợp lệ (Phải là COD hoặc E_WALLET)" };
+    }
+
+    // Nếu OK hết
+    return { valid: true, error: null };
 }
 
-module.exports = { calculateTotal, isFreeShip };
+module.exports = { calculateTotal, validateOrderInput };
