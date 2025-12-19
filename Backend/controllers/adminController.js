@@ -3,8 +3,7 @@ const db = require('../config/db');
 // Lấy thống kê cho Admin Dashboard
 exports.getStats = async (req, res) => {
   try {
-    // 1. Tính Tổng Doanh Thu (Chỉ tính các đơn đã 'Completed' hoặc 'Shipping')
-    // (Trong demo này ta tính hết các đơn khác Cancelled cho số đẹp)
+    // 1. Tính Tổng Doanh Thu (Tính hết các đơn khác Cancelled)
     const [revenueRes] = await db.query(
       "SELECT SUM(total_amount) as total FROM Orders WHERE order_status != 'Cancelled'"
     );

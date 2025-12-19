@@ -2,10 +2,7 @@
 
 const db = require('../config/db');
 
-// ================================
 // LẤY GIỎ HÀNG (Hiển thị + Tính tổng tiền)
-// GET /api/cart
-// ================================
 exports.getCart = async (req, res) => {
   try {
     // Lấy user id từ middleware 'protect'
@@ -42,10 +39,7 @@ exports.getCart = async (req, res) => {
   }
 };
 
-// ================================
 // THÊM/CẬP NHẬT GIỎ HÀNG (Logic UPSERT)
-// POST /api/cart
-// ================================
 exports.addItemToCart = async (req, res) => {
   try {
     const customerId = req.user.customer_id;
@@ -60,12 +54,12 @@ exports.addItemToCart = async (req, res) => {
     const [existingItems] = await db.query(checkSql, [customerId, product_id]);
 
     if (existingItems.length > 0) {
-      // 2. Nếu ĐÃ CÓ: Cập nhật (UPDATE) số lượng
+      // 2. Nếu ĐÃ CÓ: Cập nhật số lượng
       const newQuantity = existingItems[0].quantity + parseInt(quantity, 10);
       const updateSql = 'UPDATE Cart SET quantity = ? WHERE customer_id = ? AND product_id = ?';
       await db.query(updateSql, [newQuantity, customerId, product_id]);
     } else {
-      // 3. Nếu CHƯA CÓ: Thêm mới (INSERT)
+      // 3. Nếu CHƯA CÓ: Thêm mới 
       const insertSql = 'INSERT INTO Cart (customer_id, product_id, quantity, date_added) VALUES (?, ?, ?, NOW())';
       await db.query(insertSql, [customerId, product_id, quantity]);
     }
@@ -77,10 +71,7 @@ exports.addItemToCart = async (req, res) => {
   }
 };
 
-// ================================
 // XÓA SẢN PHẨM KHỎI GIỎ HÀNG
-// DELETE /api/cart/:productId
-// ================================
 exports.removeItemFromCart = async (req, res) => {
   try {
     const customerId = req.user.customer_id;

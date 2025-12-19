@@ -6,7 +6,6 @@ describe('Kiểm thử Giao diện Người dùng (UI Navigation)', () => {
     cy.log('--- 1. KIỂM TRA TRANG CHỦ ---');
     cy.visit('http://localhost:5173/');
     
-    // SỬA LỖI: Tìm tên mới "App Quản Lý Đơn Hàng" thay vì "ShopeeClone"
     cy.contains('App Quản Lý Đơn Hàng').should('be.visible'); 
     cy.contains('Sản phẩm nổi bật', { timeout: 10000 }).should('be.visible'); 
     
@@ -20,7 +19,7 @@ describe('Kiểm thử Giao diện Người dùng (UI Navigation)', () => {
     cy.url().should('include', '/search');
     cy.wait(1000);
     
-    // Quay lại trang chủ (Click vào Logo tên mới)
+    // Quay lại trang chủ 
     cy.contains('App Quản Lý Đơn Hàng').click();
 
     // --- BƯỚC 3: XEM CHI TIẾT SẢN PHẨM ---

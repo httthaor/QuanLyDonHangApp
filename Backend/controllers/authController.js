@@ -2,7 +2,7 @@ const db = require('../config/db');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// 1. HÀM REGISTER (Đã cập nhật 'date_of_birth')
+// 1. HÀM REGISTER 
 exports.register = async (req, res) => {
   try {
     const { first_name, last_name, email, password, date_of_birth } = req.body;
@@ -42,7 +42,7 @@ exports.register = async (req, res) => {
   }
 };
 
-// 2. HÀM LOGIN (Đã sửa lỗi 500 / lỗi treo)
+// 2. HÀM LOGIN 
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -59,7 +59,6 @@ exports.login = async (req, res) => {
 
     const user = users[0];
 
-    // KIỂM TRA QUAN TRỌNG (Sửa lỗi 500)
     // Nếu user tồn tại nhưng vì lý do nào đó không có password hash
     if (!user.password_hash) {
       return res.status(401).json({ message: 'Tài khoản này bị lỗi, không thể đăng nhập.' });
@@ -90,7 +89,7 @@ exports.login = async (req, res) => {
   }
 };
 
-// 3. HÀM GETPROFILE (Đã cập nhật 'date_of_birth')
+// 3. HÀM GETPROFILE 
 exports.getProfile = async (req, res) => {
   try {
     const userId = req.user.customer_id;
@@ -110,7 +109,7 @@ exports.getProfile = async (req, res) => {
   }
 };
 
-// 4. HÀM UPDATEPROFILE (Đã cập nhật 'date_of_birth')
+// 4. HÀM UPDATEPROFILE 
 exports.updateProfile = async (req, res) => {
   try {
     const userId = req.user.customer_id;

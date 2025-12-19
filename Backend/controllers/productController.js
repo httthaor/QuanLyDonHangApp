@@ -1,8 +1,6 @@
 const db = require('../config/db');
 
-// ================================
 // LẤY TẤT CẢ DANH MỤC
-// ================================
 exports.getCategories = async (req, res) => {
   try {
     const [categories] = await db.query('SELECT * FROM Categories');
@@ -12,9 +10,7 @@ exports.getCategories = async (req, res) => {
   }
 };
 
-// ================================
-// LẤY TẤT CẢ SẢN PHẨM (ĐÃ SỬA LỖI SEARCH)
-// ================================
+// LẤY TẤT CẢ SẢN PHẨM 
 exports.getProducts = async (req, res) => {
   try {
     const { search, category } = req.query;
@@ -31,12 +27,10 @@ exports.getProducts = async (req, res) => {
 
     // Xử lý điều kiện WHERE
     if (search) {
-      // === SỬA LỖI: CHỈ TÌM TRONG TÊN SẢN PHẨM ===
       whereClauses.push(
         'UPPER(p.product_name) LIKE UPPER(?) COLLATE utf8mb4_bin'
       );
       params.push(`%${search}%`); // Chỉ cần 1 tham số
-      // =======================================
     }
     if (category) {
       whereClauses.push('p.category_id = ?');
@@ -55,9 +49,8 @@ exports.getProducts = async (req, res) => {
   }
 };
 
-// ================================
+
 // LẤY 1 SẢN PHẨM
-// ================================
 exports.getProductById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -78,9 +71,7 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// ================================
 // (ADMIN) THÊM SẢN PHẨM
-// ================================
 exports.createProduct = async (req, res) => {
   try {
     const { product_name, description, price, stock_quantity, category_id, image_url } = req.body;
@@ -98,9 +89,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// ================================
 // (ADMIN) SỬA SẢN PHẨM
-// ================================
 exports.updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
@@ -134,9 +123,7 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-// ================================
 // (ADMIN) XÓA SẢN PHẨM (Xóa cứng)
-// ================================
 exports.deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;

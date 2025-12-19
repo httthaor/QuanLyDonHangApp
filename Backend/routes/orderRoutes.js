@@ -21,7 +21,5 @@ router.get('/my-orders', protect, orderController.getMyOrders);
 // PUT /api/orders/:id/status -> Cập nhật trạng thái đơn hàng
 router.put('/:id/status', protect, admin, orderController.updateOrderStatus);
 
-// (Bạn có thể thêm route GET /api/orders/ (lấy tất cả đơn hàng) cho Admin nếu muốn)
-
 
 module.exports = router;

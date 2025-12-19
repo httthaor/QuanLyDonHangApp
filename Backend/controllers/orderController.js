@@ -2,10 +2,7 @@
 
 const db = require('../config/db');
 
-// ================================
 // TẠO ĐƠN HÀNG MỚI (CHECKOUT)
-// POST /api/orders
-// ================================
 exports.createOrder = async (req, res) => {
   // Bắt đầu một kết nối riêng để dùng Transaction
   let connection;
@@ -93,10 +90,7 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-// ================================
 // LẤY LỊCH SỬ ĐƠN HÀNG CỦA TÔI
-// GET /api/orders/my-orders
-// ================================
 exports.getMyOrders = async (req, res) => {
   try {
     const customerId = req.user.customer_id;
@@ -107,10 +101,7 @@ exports.getMyOrders = async (req, res) => {
   }
 };
 
-// ================================
 // (ADMIN) CẬP NHẬT TRẠNG THÁI ĐƠN HÀNG
-// PUT /api/orders/:id/status
-// ================================
 exports.updateOrderStatus = async (req, res) => {
   try {
     const { id } = req.params;
@@ -126,9 +117,6 @@ exports.updateOrderStatus = async (req, res) => {
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Không tìm thấy đơn hàng.' });
     }
-
-    // (Nâng cao: Nếu status là 'Cancelled', bạn nên code thêm logic cộng lại hàng vào kho)
-    
     res.status(200).json({ message: `Cập nhật trạng thái đơn hàng #${id} thành công.` });
   } catch (error) {
     res.status(500).json({ message: 'Lỗi server', error: error.message });
