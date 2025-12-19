@@ -26,8 +26,8 @@ Khác với các sàn thương mại điện tử như Shopee hay Lazada, hệ t
   
 - Phân quyền:
   
--    Admin (Chủ shop): Người duy nhất có quyền nhập liệu sản phẩm, quản lý kho, xử lý trạng thái đơn hàng và xem báo cáo doanh thu.
+  - Admin (Chủ shop): Người duy nhất có quyền nhập liệu sản phẩm, quản lý kho, xử lý trạng thái đơn hàng và xem báo cáo doanh thu.
   
--    Customer (Khách hàng): Người dùng thực hiện các thao tác đăng ký tài khoản, xem sản phẩm và đặt mua hàng.
+  - Customer (Khách hàng): Người dùng thực hiện các thao tác đăng ký tài khoản, xem sản phẩm và đặt mua hàng.
   
 - Lý do lựa chọn: Mô hình này phù hợp với quy mô đồ án môn học, giúp tập trung sâu vào việc xử lý logic đơn hàng, tính toán doanh thu và trải nghiệm người dùng thay vì phân tán vào việc quản lý đa gian hàng phức tạp.
