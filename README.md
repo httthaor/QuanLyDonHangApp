@@ -36,7 +36,7 @@ Khác với các sàn thương mại điện tử như Shopee hay Lazada, hệ t
 
 #### 2.1. Quản lý khách hàng
 
-- Chức năng: Đăng ký. đăng nhập, cập nhật hồ sơ cá nhân.
+- Chức năng: Đăng ký, đăng nhập, cập nhật hồ sơ cá nhân.
 
 #### 2.2. Quản lý sản phẩm
 
