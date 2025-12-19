@@ -37,12 +37,15 @@ Khác với các sàn thương mại điện tử như Shopee hay Lazada, hệ t
 #### 2.1. Quản lý khách hàng
 
 - Chức năng: Đăng ký. đăng nhập, cập nhật hồ sơ cá nhân.
-  
-- Backend: API /auth/register, /auth/login, /auth/profile.
-  
-- Giao diện:
-![]([https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg))
-![]([[https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg)](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/login.jpg))
-![]([[https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg)](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/profile.jpg))
 
+#### 2.2. Quản lý sản phẩm
 
+- Chức năng: Hiển thị danh sách, tìm kiếm theo tên, lọc theo danh mục.
+
+#### 2.3. Quản lý giỏ hàng
+
+-	Chức năng: Thêm sản phẩm, xem giỏ hàng, tính tổng tiền tự động.
+
+#### 2.4. Quản lý đơn hàng
+
+- Chức năng: Nhập địa chỉ giao hàng, chọn phương thức thanh toán (COD/Ví điện tử), tạo đơn hàng.
