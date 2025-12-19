@@ -31,3 +31,18 @@ Khác với các sàn thương mại điện tử như Shopee hay Lazada, hệ t
   - Customer (Khách hàng): Người dùng thực hiện các thao tác đăng ký tài khoản, xem sản phẩm và đặt mua hàng.
   
 - Lý do lựa chọn: Mô hình này phù hợp với quy mô đồ án môn học, giúp tập trung sâu vào việc xử lý logic đơn hàng, tính toán doanh thu và trải nghiệm người dùng thay vì phân tán vào việc quản lý đa gian hàng phức tạp.
+
+### 2. Các chức năng chính
+
+#### 2.1. Quản lý khách hàng
+
+- Chức năng: Đăng ký. đăng nhập, cập nhật hồ sơ cá nhân.
+  
+- Backend: API /auth/register, /auth/login, /auth/profile.
+  
+- Giao diện:
+![]([https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg))
+![]([[https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg)](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/login.jpg))
+![]([[https://avatars.githubusercontent.com/u/583231](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/register.jpg)](https://github.com/httthaor/QuanLyDonHangApp/blob/be3e890a097eda27f81a7349be828c80a6446af9/img/profile.jpg))
+
+
