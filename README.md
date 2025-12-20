@@ -1,5 +1,13 @@
 # BÁO CÁO ĐỒ ÁN MÔN HỌC
 
+## THÀNH VIÊN
+
+- Huỳnh Trần Thu Thảo - N23DCPT105
+
+- Nguyễn Thị Thu Tâm - N23DCPT103
+
+- Dương Khánh Ngọc - N23DCPT095
+
 ### 1. Tổng quan đề tài
 
 #### 1.1. Giới thiệu
