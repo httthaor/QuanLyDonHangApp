@@ -1,6 +1,6 @@
 # BÁO CÁO ĐỒ ÁN MÔN HỌC
 
-**THÀNH VIÊN**
+**Thành viên**
 
 - Huỳnh Trần Thu Thảo - N23DCPT105
 
